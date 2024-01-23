@@ -1,0 +1,57 @@
+/* Styles go here */
+
+.r-page-header-space {
+  height: 40px;
+}
+
+.r-page-footer-space {
+  height: 50px;
+}
+
+.r-page-footer,
+.r-page-header,
+.r-page-footer-space,
+.r-page-header-space {
+  display: none;
+}
+
+.r-page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-top: 10px;
+  font-size: 11px;
+  border-top: 1px solid black; /* for demo */
+}
+
+.r-page-header {
+  /* padding-bottom: 10px; */
+  padding-top: 2px;
+  position: fixed;
+  top: 0mm;
+  width: 100%;
+  border-bottom: 2px solid black; /* for demo */
+}
+.r-page p {
+  opacity: 0;
+  line-height: 0.01;
+}
+.r-page {
+  margin-left: 10px;
+  page-break-after: always;
+}
+
+@media print {
+  thead {
+    display: table-header-group;
+  }
+  tfoot {
+    display: table-footer-group;
+  }
+  .r-page-footer,
+  .r-page-header,
+  .r-page-footer-space,
+  .r-page-header-space {
+    display: block;
+  }
+}

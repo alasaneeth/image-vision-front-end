@@ -1,0 +1,7 @@
+export const PAYMENT_STATUS_CODE = {
+    PAYMENT_NOT_DONE: 1,
+    PAYMENT_PARTIAL: 2,
+    PAYMENT_COMPLETED: 3,
+    CASH_PAY: 4
+
+}

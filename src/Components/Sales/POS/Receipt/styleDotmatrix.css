@@ -1,0 +1,101 @@
+.billBody {
+    /* border: 1px solid #33333330; */
+    font-size: 12px;
+    font-family: "Roman";
+  }
+  .flex-print {
+    /* display: flex; */
+    flex-wrap: wrap;
+  }
+  .justify-content-center {
+    justify-content: center;
+  }
+  .justify-content-flex-end {
+    justify-content: flex-end;
+  }
+  .text-align-left {
+    text-align: justify;
+  }
+  .fullWidth {
+    width: 100%;
+  }
+  .col-6 {
+    flex: 0 0 auto;
+    padding: var(--col-padding);
+    width: 50%;
+  }
+  .flex-direction-row {
+    flex-direction: row;
+  }
+  
+  .mt {
+    margin-top: 0.2rem;
+  }
+  .mb {
+    margin-bottom: 0.2rem;
+  }
+  
+  /* table {
+    border-collapse: collapse;
+  } */
+  /* table th {
+    /* font-size: 13px; */
+    /* border-bottom: 1px solid #242424 !important; */
+    /* padding-bottom: 5px;
+    padding-top: 5px;
+  } */ */
+   /* tbody {
+    padding-top: 55px;
+  } */
+  /* table td {
+    font-size: 12px;
+  }  */
+  /* .justify-content-spaceBetween {
+    justify-content: space-between;
+  } */
+  small,
+  strong {
+    display: block;
+  }
+  .text-center {
+    text-align: center;
+  }
+   .print-table-pos {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .print-table-pos-head
+  {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: justify;
+  }
+  /* .print-table-pos,
+  .print-table-pos tr,
+  .print-table-pos td {
+    font-size: 12px;
+  } */
+  /* .invoiceHeaderTable th {
+    text-align: center;
+  } */
+  
+   /* .print-table-pos thead {
+    background-color: #eee;
+  } */
+  /* .print-table-pos thead th {
+    font-size: 12px;
+  } */
+  
+  /* .print-table-pos th {
+    padding: 7px;
+  } */
+  /* .print-table-pos td {
+    color: black;
+    padding: 2px;
+  }   */
+
+  .thead {
+    height: 20px;
+    
+  }
+  

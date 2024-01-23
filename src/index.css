@@ -1,0 +1,50 @@
+body,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+}
+@media only screen and (max-width: 600px) {
+  body,
+  * {
+    font-size: 12px;
+  }
+  table,
+  th,
+  tr,
+  td {
+    font-size: 8px !important;
+    padding: 2px 4px !important;
+  }
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+:root {
+  --primary: #2f324c;
+  --primary-color: #fdfdfd;
+  --dark-primary: #252737;
+  --secondary: #126550;
+  --dark-secondary: #126550;
+  --secondary-color: #fff;
+  --success: #34a853;
+  --success-dark: #359244;
+  --col-padding: 5px;
+}
+.img-container {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0;
+}
+.img-container img {
+  width: 250px !important;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px 1rem;
+}

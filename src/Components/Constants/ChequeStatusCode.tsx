@@ -1,0 +1,7 @@
+export const CHEQUE_STATUS_CODE = {
+    CHEQUE_IN_HAND: 6,
+    CHEQUE_DEPOSITED: 7,
+    CHEQUE_RETURNED: 8,
+    CHEQUE_REALIZED: 11,
+    
+}

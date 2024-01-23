@@ -1,0 +1,45 @@
+.page-footer-space {
+  height: 130px;
+}
+.page-header-space {
+  height: 100px;
+}
+.invoice-page-header-space {
+  height: 100px;
+}
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.page-header {
+  position: fixed;
+  top: 0mm;
+  width: 100%;
+}
+
+.bill-page-header {
+  position: fixed;
+  top: 0mm;
+  width: 100%;
+}
+
+.page {
+  page-break-after: always;
+}
+.page p {
+  opacity: 0;
+  line-height: 0.01;
+}
+@media print {
+  .page {
+    width: 100%;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tfoot {
+    display: table-footer-group;
+  }
+}

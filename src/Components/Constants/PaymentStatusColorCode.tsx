@@ -1,0 +1,6 @@
+export const PAYMENT_STATUS_COLOR_CODE = {
+    PAYMENT_NOT_DONE: '#DC143C40',//Light Red
+    PAYMENT_PARTIAL: '#FFD580', //Light Orange
+    PAYMENT_COMPLETED: '#90EE9060', // Light Green
+    REVERSED:'#D3D3D3 '
+}
