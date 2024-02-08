@@ -24,12 +24,11 @@ const parcelVarification = lazy(()=>import("./Varificatiin/Varification"))
 
 export const cashierRouteConfig = {
   settings: {},
-  auth: ["admin","superAdmin", "cashier"],
+  auth: ["admin", "cashier"],
   routes: [
     { path: "/dashboard", component: Dashboard },
     { path: "/customer", component: Customer },
     { path: "/stock-transfer", component: Transfer },
-    {path:"/location", component:Location},
     {path:"/corier" , component:Courier},
     {path:'/route', component:Route},
     {path:'/add-image', component:AddImage},
@@ -44,9 +43,10 @@ export const cashierRouteConfig = {
 
 export const authorisedRouteConfig = {
   settings: {},
-  auth: ["admin","superAdmin",],
+  auth: ["admin"],
   routes: [
     { path: "/reports", component: Reports },
+    {path:"/location", component:Location},
     { path: "/user", component: Users },
     { path: "/user-type", component: UserType },
     { path: "/settings", component: Settings },
