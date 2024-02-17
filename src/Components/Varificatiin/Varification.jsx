@@ -17,7 +17,6 @@ export default function Reversal() {
   const [parcelCode, setParcelCode] = useState("");
   const [data, setData] = useState();
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [model, setModel] = useState(null);
 
   const getParcelCode = (e) => {
     const { value } = e.target;
@@ -29,14 +28,6 @@ export default function Reversal() {
     setInitLoad(true);
   }
 
-  const loadModel = async () => {
-    const loadedModel = await mobilenet.load();
-    setModel(loadedModel);
-  };
-
-  useEffect(() => {
-    loadModel();
-  }, []);
 
   const fetchParcelData = async () => {
     setInitLoad(true);
@@ -57,55 +48,38 @@ export default function Reversal() {
   };
 
   const compareImages = async () => {
-    try {
-      if (!model || !data || !uploadedImage) {
-        console.error('Model, data, or uploadedImage is missing.');
-        return;
-      }
-  
-      const imgElement = document.createElement('img');
-      imgElement.src = URL.createObjectURL(uploadedImage);
-  
-      await new Promise((resolve, reject) => {
-        imgElement.onload = resolve;
-        imgElement.onerror = reject;
-      });
-  
-      const uploadedImageTensor = tf.browser.fromPixels(imgElement);
-  
-      const serverImagesTensors = await Promise.all(data.parcelImages.map(async (image) => {
-        const serverImgElement = document.createElement('img');
-        serverImgElement.src = `http://localhost/Image-vision-api/public${image.path}`;
-  
-        await new Promise((resolve, reject) => {
-          serverImgElement.onload = resolve;
-          serverImgElement.onerror = reject;
-        });
-  
-        return tf.browser.fromPixels(serverImgElement);
-      }));
-  
-      const [uploadedImageEmbedding] = model.infer(uploadedImageTensor, 'conv_preds');
-      const serverImageEmbeddings = await Promise.all(
-        serverImagesTensors.map((tensor) => model.infer(tensor, 'conv_preds'))
-      );
-  
-      const similarities = serverImageEmbeddings.map((embedding) => {
-        const similarity = tf.losses.cosineDistance(embedding, uploadedImageEmbedding).dataSync()[0];
-        return similarity;
-      });
-  
-      uploadedImageTensor.dispose();
-      serverImagesTensors.forEach((tensor) => tensor.dispose());
-  
-      console.log('Similarities:', similarities);
-      // You can use the similarity information as needed
-    } catch (error) {
-      console.error('Error comparing images:', error);
-      // Handle errors as needed
+    if (!uploadedImage || !data || !data.parcelImages) {
+      alert('Please upload an image and fetch parcel images first.');
+      return;
     }
-  };
   
+    const uploadedImageElement = document.createElement('img');
+    uploadedImageElement.src = URL.createObjectURL(uploadedImage);
+  
+    const model = await mobilenet.load();
+    const uploadedImagePrediction = await model.classify(uploadedImageElement);
+  
+    for (const parcelImage of data.parcelImages) {
+      const parcelImageElement = document.createElement('img');
+      parcelImageElement.src = `http://localhost/Image-vision-api/public${parcelImage.path}`;
+  
+      try {
+        await parcelImageElement.decode();
+        const parcelImagePrediction = await model.classify(parcelImageElement);
+  
+        if (uploadedImagePrediction[0].className === parcelImagePrediction[0].className) {
+         alert('Images are similar!');
+          return;
+        }
+      } catch (error) {
+        console.error('Error decoding or classifying parcel image:', error);
+      }
+    }
+  
+    alert('Images are not similar.');
+  };
+
+
 
   return (
     <>
@@ -152,11 +126,13 @@ export default function Reversal() {
                       <Button
                         disabled={initLoad}
                         variant="contained"
-                        color="primary"
-                        onClick={compareImages}>
+                        color="secondary"
+                        onClick={compareImages}
+                      >
                         Compare Images
                       </Button>
                     </Grid>
+
                   </Grid>
                 </Box>
 
@@ -194,7 +170,7 @@ export default function Reversal() {
                             <img
                               src={URL.createObjectURL(uploadedImage)}
                               alt={`uploaded-image`}
-                              style={{ width: '500px', height: '400px', alignContent: 'left' }}
+                              style={{ width:400, height:500 }}
                             />
                           )}
                         </div>
