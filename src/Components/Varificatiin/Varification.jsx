@@ -58,17 +58,21 @@ export default function Reversal() {
   
     const model = await mobilenet.load();
     const uploadedImagePrediction = await model.classify(uploadedImageElement);
+
+    const baseUrl = 'http://localhost/Image-vision-api/public';
+
+    let parcelImagePrediction;
   
-    for (const parcelImage of data.parcelImages) {
+    for (const parcelImage of data.parcelImages) { // Accessing the first parcel's images assuming there's only one parcel in the data
       const parcelImageElement = document.createElement('img');
-      parcelImageElement.src = `http://localhost/Image-vision-api/public${parcelImage.path}`;
-  
+      parcelImageElement.src = baseUrl + parcelImage.path;
+    
       try {
         await parcelImageElement.decode();
-        const parcelImagePrediction = await model.classify(parcelImageElement);
-  
+         parcelImagePrediction = await model.classify(parcelImageElement);
+    
         if (uploadedImagePrediction[0].className === parcelImagePrediction[0].className) {
-         alert('Images are similar!');
+          alert('Images are similar!');
           return;
         }
       } catch (error) {
@@ -78,7 +82,8 @@ export default function Reversal() {
   
     alert('Images are not similar.');
   };
-
+  
+  
 
 
   return (
