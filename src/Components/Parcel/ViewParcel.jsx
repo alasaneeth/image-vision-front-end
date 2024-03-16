@@ -8,7 +8,7 @@ import { useQuery } from "react-query";
 import { REACT_QUERY_KEYS } from "Components/Constants/ReactQueryKeys";
 import { ErrorMessage } from "formik";
 import BasicDialog from "Components/MUI_components/Dialog-Box/basicDialog";
-import { useReactToPrint } from "react-to-print";
+import ReactToPrint, { useReactToPrint } from "react-to-print";
 import { currency } from "Components/MUI_components/currencyFormatterTag";
 import Loading from "Components/MUI_components/loading";
 import { pageStyle } from "Components/Print/printPagesStyles";
@@ -139,7 +139,7 @@ export default function ComplexGrid({ code }) {
             minHeight: "85vh",
           }}
         >
-          {/* <div className="flex-end">
+          <div className="flex-end">
 
             <ReactToPrint
               trigger={() => (
@@ -148,96 +148,8 @@ export default function ComplexGrid({ code }) {
               content={() => componentRef.current}
               pageStyle={pageStyle}
             />
-          </div> */}
-          <div className="flex-end"> 
-            <Button 
-
-              onClick={() => {
-                setOpenBillPrint(true)
-
-              }}
-              // startIcon={
-              //   props.isSubmitting && (
-              //     <CircularProgress color="inherit" size={20} />
-              //   )
-              // }
-              type="submit"
-            >
-              Print
-            </Button>
           </div>
-       
-
-          <BasicDialog
-              title="Payment Receipt"
-              open={openBillPrint}
-              onClose={(e) => setOpenBillPrint(false)}
-            >
-              <div>     
-
-              </div>
-              <div className="flex">
-                <button
-                  type="button"
-                  className="btn-success button"
-                  onClick={() => {
-                    printType.current = 'POS';
-                    handlePrintPOS();
-                    setOpenBillPrint(false)
-
-                  }}
-                >
-                  pos bill
-                  {/* <span>
-                    {isSubmitting ? (
-                      <CircularProgress
-                        color="inherit"
-                        size={20}
-                      />
-                    ) : (
-                      "[ Enter ]"
-                    )}
-                  </span> */}
-                </button>
-
-                <button
-                  type="button"
-                  // disabled={
-                  //   !cashPaymentValidity() || isSubmitting
-                  // }
-                  onClick={() => {
-                    printType.current = 'DOT';
-                    handlePrintDotMatrix();
-                    setOpenBillPrint(false)
-
-                  }}
-                  className="btn-success button"
-                >
-                  Dot matrix bill
-                  {/* <span>
-                    {isSubmitting ? ( 
-                       <CircularProgress
-                        color="inherit"
-                        size={20}
-                      /> 
-                      ) : (
-                      ""
-                    )} 
-                  </span> */}
-                </button>
-
-              </div>
-              <div className="flex-end">
-                <Button
-                  color="secondary"
-                  onClick={() => {
-                    setOpenBillPrint(false)
-                  }}
-                >
-                  Close
-                </Button>
-              </div>
-            </BasicDialog>
+        
           <div>
             <div ref={componentRef} className={classes.printArea}>
               <Reports title={"PAYMENT RECEIPT"}>

@@ -5,7 +5,7 @@ import { COLUMNS_NAME } from "Components/Constants/ColumnsNames";
 import ReceivedParcelService from "Service/Parcel/ReceivedParcel.service";
 import Title from "Components/Card/title";
 import Table from "Components/MUI_components/Table/table";
-import ViewRecievedParcel from './viewReceivedParcel'
+import ViewRecievedParcel from '../ViewParcel'
 
 const Customer = () => {
   // customer Table details
