@@ -90,27 +90,6 @@ export default function ComplexGrid({ code }) {
   const [openBillPrint, setOpenBillPrint] = useState();
   const printType = useRef('');
 
-
-  const billReceiptPrintComponent = React.useRef(null);
-  const computerReceiptPrintComponent = React.useRef(null);
-
-  const handlePrint = useReactToPrint({
-
-    content: () => printType.current == 'POS' ? billReceiptPrintComponent.current : computerReceiptPrintComponent.current,
-    pageStyle: pageStyle.receipt,
-  });
-
-  const handlePrintPOS = useReactToPrint({
-    content: () => billReceiptPrintComponent.current,
-    pageStyle: pageStyle.receipt,
-  });
-
-  const handlePrintDotMatrix = useReactToPrint({
-    content: () => computerReceiptPrintComponent.current,
-    pageStyle: pageStyle.invoiceA4,
-  });
-
-
   const fontSize = { fontSize: 13 };
 
   const { isError, isLoading, data } = useQuery(
@@ -127,6 +106,9 @@ export default function ComplexGrid({ code }) {
     return <ErrorMessage />
   }
 
+  const openImageInNewTab = (url) => {
+    window.open(url, '_blank');
+  }
   
   return (
     <div>
@@ -157,7 +139,12 @@ export default function ComplexGrid({ code }) {
                 <Grid item xs={6}>
                 {data.parcelImages.map(image => (
              <div key={image.id}>
-              <img style={{height:300, width:250}} src={ "http://localhost/Image-vision-api/public"+ image.path} alt={`Image for `} />
+              <img 
+                style={{height:300, width:250, cursor: 'pointer'}} 
+                src={"http://localhost/Image-vision-api/public" + image.path} 
+                alt={`Image for `} 
+                onClick={() => openImageInNewTab("http://localhost/Image-vision-api/public" + image.path)}
+              />
             </div>
                 ))}
                 </Grid>
